@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>加载模型</title>
+  <link rel="stylesheet" href="http://10.1.128.211:85/static/UI/latest/BOS3DUI.min.css"></script>
+  <script src="http://10.1.128.211:85/static/UI/latest/BOS3DUI.min.js"></script>
+  <script src="http://10.1.128.211:85/static/latest/BOS3D.min.js"></script>
+</head>
+<style>
+  body {
+    margin: 0;
+    overflow: hidden;
+    position: fixed;
+  }
+
+  .viewport {
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<body>
+<div id="viewport" class="viewport"></div>
+</body>
+<script rel="script">
+  // 获取html元素
+  const html = document.querySelector("html");
+  document.querySelector(".viewport").style.width = html.clientWidth + 'px';
+  document.querySelector(".viewport").style.height = html.clientHeight - 1 + 'px';
+  // 创建配置对象
+  const option = {
+    host: "http://10.1.128.211:85",
+    viewport: "viewport"
+  };
+  // 将配置导入到BOS3D.Viewer的方法中
+  const viewer3D = new BOS3D.Viewer(option);
+  // 创建底部菜单栏
+  new BOS3DUI({
+    viewer3D,
+    BOS3D: window.BOS3D,
+  })
+  /**
+   * 添加一个模型
+   * 参数一：模型key
+   * 参数二：模型数据库key
+   */
+  viewer3D.addView("M1726402201592", "j6ae009c22274ef3ad814199f9b04938", "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyS2V5IjoiYWRtaW4iLCJ1c2VyTmFtZSI6ImFkbWluIiwidXNlclR5cGUiOiIxIiwiYXBwS2V5IjoiYm9zIiwiYXBwTmFtZSI6ImJvcyIsImxvZ2luVGltZSI6IjE3MjY5OTIzNTEzNzMiLCJleHAiOjB9.eTG363bKLKwAfpJRPUl456ssw801kn1-bkHwtp7Kcis")
+  
+  // 模型加载完成时触发
+  viewer3D.viewerImpl.modelManager.addEventListener(window.BOS3D.EVENTS.ON_LOAD_COMPLETE, () => {
+
+    viewer3D.setBlinkByComponentKeys(["M1726402201592_1850918"], new BOS3D.Color(1, 0, 0, 1), 1000);
+
+    viewer3D.flyTo({
+      position:{
+        "x":539391041.5354812,
+        "y":388696090.3066973,
+        "z":21668.6674064615
+      },
+      target:{
+        "x":1156259945.0483656,
+        "y":214302832.1010036,
+        "z":-330570227.9494611
+      },
+      up:{
+        "x":0.1446764474789413,
+        "y":-0.22206044283690743,
+        "z":0.9642395372893344
+      }
+    },function(){});
+    
+  });
+</script>
+
+</html>
